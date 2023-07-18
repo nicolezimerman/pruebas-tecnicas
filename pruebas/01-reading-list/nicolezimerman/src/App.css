@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.main {
+  display: grid;
+  grid-template-columns: [books-list-section] 70% [reading-list-section] 30%;
+  gap: 30px;
+}
+
+.books-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  list-style-type: none;
+}
