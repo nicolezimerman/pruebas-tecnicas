@@ -1,0 +1,27 @@
+.reading-list-section {
+  border-radius: 15px;
+  background: aliceblue;
+}
+
+.read-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  list-style-type: none;
+  padding: 15px;
+}
+.bookContainer {
+  position: relative;
+}
+.removeButton {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border-radius: 25px;
+  background-color: lightslategray;
+  color: white;
+
+  box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
+  -webkit-box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
+}

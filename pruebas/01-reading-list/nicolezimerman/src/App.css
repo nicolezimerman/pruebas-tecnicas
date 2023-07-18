@@ -1,0 +1,9 @@
+#root {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.main {
+  display: grid;
+  grid-template-columns: [books-list-section] calc(65% - 15px) [reading-list-section] 35%;
+  gap: 15px;
+}

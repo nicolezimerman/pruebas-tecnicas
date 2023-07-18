@@ -1,0 +1,13 @@
+.books-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  list-style-type: none;
+  padding: 15px;
+}
+.book-not-available {
+  opacity: 50%;
+}
+.book-available {
+  cursor: pointer;
+}
