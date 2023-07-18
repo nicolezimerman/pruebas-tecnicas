@@ -14,14 +14,3 @@
   gap: 15px;
   list-style-type: none;
 }
-
-.book {
-  width: 150px;
-  border-radius: 5px;
-  box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
-  -webkit-box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
-  -moz-box-shadow: 2px 3px 6px -1px rgba(0, 0, 0, 0.41);
-}
-.reading-list-section {
-  background: aliceblue;
-}

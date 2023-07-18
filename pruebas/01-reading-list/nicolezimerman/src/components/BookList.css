@@ -1,0 +1,6 @@
+.book-not-available {
+  opacity: 50%;
+}
+.book-available {
+  cursor: pointer;
+}
