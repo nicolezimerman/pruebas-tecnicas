@@ -1,13 +1,20 @@
-import { useContext } from "react";
-import { FiltersContext } from "../FiltersProvider.jsx";
-import useFilters from "../hooks/useFilters.js";
+import { useAtom, useAtomValue } from "jotai";
+import { readListAtom, bookFiltersAtom } from "../bookAtoms.js";
+
+function removeDuplicates(items) {
+  return Array.from(new Set(items));
+}
 
 export default function GenresFilter() {
-  const {
-    filters: { genre },
-    setFilters,
-  } = useContext(FiltersContext);
-  const { genresList } = useFilters();
+  const booksState = useAtomValue(readListAtom);
+  const [filters, setFilters] = useAtom(bookFiltersAtom);
+  const books = booksState.books;
+
+  const genresList = removeDuplicates(
+    books
+      .map((book) => book.genre)
+      .sort((genre1, genre2) => genre1.localeCompare(genre2))
+  );
 
   const handleChangeFilter = (event) => {
     setFilters((prevFilters) => ({
@@ -15,13 +22,14 @@ export default function GenresFilter() {
       genre: event.target.value,
     }));
   };
+
   return (
     <div>
       <label>Choose a genre:</label>
       <select
         name="genres"
         id="genres"
-        value={genre}
+        value={filters.genre}
         onChange={handleChangeFilter}
       >
         <option value="All">All</option>

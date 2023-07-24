@@ -63,6 +63,6 @@ Usa el archivo `books.json` para obtener los datos de los libros. Puedes añadir
 **¿Quieres ir más allá?** Estos son algunos desafíos adicionales que puedes intentar:
 
 - Implementar una funcionalidad de búsqueda en la lista de libros disponibles.
-- Añade un nuevo filtro para filtrar los libros por número de páginas.
+- Añade un nuevo filtro para filtrar los libros por número de páginas. (OK)
 - Permitir la reorganización de los libros en la lista de lectura por prioridad.
 - Haz que tu diseño sea responsive.

@@ -1,11 +1,26 @@
-import { useContext } from "react";
-import { FiltersContext } from "../FiltersProvider.jsx";
+import { useMemo } from "react";
+import { useAtom, useAtomValue } from "jotai";
+import { readListAtom, bookFiltersAtom } from "../bookAtoms.js";
 
 export default function PagesFilter() {
-  const {
-    filters: { maxPages },
-    setFilters,
-  } = useContext(FiltersContext);
+  const booksState = useAtomValue(readListAtom);
+  const [filters, setFilters] = useAtom(bookFiltersAtom);
+
+  const books = useMemo(() => {
+    return booksState.books;
+  }, [booksState]);
+
+  const maxAmountPages = useMemo(() => {
+    let max = 0;
+
+    books.forEach((book) => {
+      if (book.pages > max) {
+        max = book.pages;
+      }
+    });
+
+    return max;
+  }, [books]);
 
   const handleChangeFilter = (event) => {
     setFilters((prevFilters) => ({
@@ -22,12 +37,12 @@ export default function PagesFilter() {
         type="range"
         name="maxpages"
         id="maxpages"
-        value={maxPages}
+        value={filters.maxPages}
         onChange={handleChangeFilter}
         min={0}
-        max={1000}
+        max={maxAmountPages}
       ></input>
-      {maxPages}
+      {maxAmountPages}
     </div>
   );
 }
