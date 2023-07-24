@@ -15,18 +15,32 @@ export default function useFilters() {
 
   const { filters } = useContext(FiltersContext);
 
+  const addRemoveFromReadList = (ISBN) => {
+    const updatedBooks = books.map((book) => {
+      if (book.ISBN === ISBN) {
+        return { ...book, onReadList: !book.onReadList };
+      } else {
+        return book;
+      }
+    });
+    setBooks(updatedBooks);
+    //update local storage
+    localStorage.setItem(LIST_BOOK_KEY, JSON.stringify(updatedBooks));
+  };
+
   //on first load
   useEffect(() => {
     const storedBooks =
       JSON.parse(localStorage.getItem(LIST_BOOK_KEY)) ?? mappedBooks();
     setBooks(storedBooks);
-    //SOLO SI ESTA VACIO PREVIAMENTE ?
     localStorage.setItem(LIST_BOOK_KEY, JSON.stringify(storedBooks));
   }, []);
 
   const bookListFiltered = useMemo(() => {
     return books.filter(
-      (book) => book.genre === filters.genre || filters.genre === "All"
+      (book) =>
+        (book.genre === filters.genre || filters.genre === "All") &&
+        book.pages < filters.maxPages
     );
   }, [filters, books]);
 
@@ -41,19 +55,6 @@ export default function useFilters() {
   const genresList = useMemo(() => {
     return Array.from(new Set(books.map(({ genre }) => genre)));
   }, [books]);
-
-  const addRemoveFromReadList = (ISBN) => {
-    const updatedBooks = books.map((book) => {
-      if (book.ISBN === ISBN) {
-        return { ...book, onReadList: !book.onReadList };
-      } else {
-        return book;
-      }
-    });
-    setBooks(updatedBooks);
-    //update local storage
-    localStorage.setItem(LIST_BOOK_KEY, JSON.stringify(updatedBooks));
-  };
 
   return {
     books: bookListFiltered,
