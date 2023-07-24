@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import { FiltersContext } from "../FiltersProvider";
 import booksList from "../mocks/books.json";
 
@@ -8,10 +8,21 @@ const mappedBooks = () => {
   });
 };
 
+const LIST_BOOK_KEY = "booksList";
+
 export default function useFilters() {
   const [books, setBooks] = useState(mappedBooks);
 
   const { filters } = useContext(FiltersContext);
+
+  //on first load
+  useEffect(() => {
+    const storedBooks =
+      JSON.parse(localStorage.getItem(LIST_BOOK_KEY)) ?? mappedBooks();
+    setBooks(storedBooks);
+    //SOLO SI ESTA VACIO PREVIAMENTE ?
+    localStorage.setItem(LIST_BOOK_KEY, JSON.stringify(storedBooks));
+  }, []);
 
   const bookListFiltered = useMemo(() => {
     return books.filter(
@@ -32,15 +43,16 @@ export default function useFilters() {
   }, [books]);
 
   const addRemoveFromReadList = (ISBN) => {
-    setBooks((prevBooks) => {
-      return prevBooks.map((book) => {
-        if (book.ISBN === ISBN) {
-          return { ...book, onReadList: !book.onReadList };
-        } else {
-          return book;
-        }
-      });
+    const updatedBooks = books.map((book) => {
+      if (book.ISBN === ISBN) {
+        return { ...book, onReadList: !book.onReadList };
+      } else {
+        return book;
+      }
     });
+    setBooks(updatedBooks);
+    //update local storage
+    localStorage.setItem(LIST_BOOK_KEY, JSON.stringify(updatedBooks));
   };
 
   return {
