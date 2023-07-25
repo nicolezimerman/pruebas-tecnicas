@@ -32,11 +32,6 @@ export const readListAtom = atom(
     const books = get(booksAtom);
     const filters = get(bookFiltersAtom);
 
-    console.log(
-      "get executed",
-      books.filter((book) => book.onReadList)
-    );
-
     return {
       books,
       readlistBooks: books.filter((book) => book.onReadList),
