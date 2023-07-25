@@ -14,23 +14,14 @@ const booksAtom = atom(initialBooks);
 
 function createSetBookReadlist(onReadList) {
   return (get, set, ISBN) => {
-    console.log("update", ISBN);
     const books = get(booksAtom);
-    console.log(books);
 
     const updatedBooks = books.map((book) => {
-      console.log(`book ISBN ${book.ISBN} === ${ISBN}}`);
       if (book.ISBN === ISBN) {
-        console.log("book to update", {
-          ...book,
-          onReadList,
-        });
         return { ...book, onReadList };
       }
       return book;
     });
-
-    console.log("updatedBooks", updatedBooks);
 
     set(booksAtom, updatedBooks);
   };

@@ -11,7 +11,7 @@ export default function BookList() {
 
   console.log(booksState);
 
-  const { books, readlistBooks } = booksState;
+  const { books, readlistBooks, filteredBooks } = booksState;
 
   const totalBooks = books.length;
 
@@ -22,11 +22,11 @@ export default function BookList() {
         <h3>{readlistBooks.length} books in the read list</h3>
       )}
       <h3>
-        {books.length} books in the genre: {filters.genre}
+        {filteredBooks.length} books in the genre: {filters.genre}
       </h3>
       <Filters />
       <ul className="books-list">
-        {books.map((book) => {
+        {filteredBooks.map((book) => {
           return (
             <li
               key={book.ISBN}

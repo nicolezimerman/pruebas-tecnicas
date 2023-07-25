@@ -16,10 +16,12 @@ export default function ReadList() {
           <li key={book.ISBN} className="bookContainer">
             <button
               className="removeButton"
-              onClick={setBooksState({
-                type: "removeFromReadList",
-                payload: book.ISBN,
-              })}
+              onClick={() =>
+                setBooksState({
+                  type: "removeFromReadList",
+                  payload: book.ISBN,
+                })
+              }
             >
               x
             </button>
